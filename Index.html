@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For My Love</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Georgia', serif;
+      background-image: url('https://images.unsplash.com/photo-1509223197845-458d87318791?auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      background-position: center;
+      color: #2d1e1e;
+    }
+    .overlay {
+      background: rgba(255, 255, 255, 0.8);
+      min-height: 100vh;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    h1 {
+      font-size: 2em;
+      text-align: center;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 1em;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #f08080;
+      color: white;
+      cursor: pointer;
+    }
+    .poem, .final-message {
+      max-width: 700px;
+      background: #fff8f6;
+      padding: 30px;
+      margin-top: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      white-space: pre-line;
+      font-size: 1.1em;
+    }
+    .hidden {
+      display: none;
+    }
+    #poemContent {
+      border-left: 3px solid #f08080;
+      padding-left: 15px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <div id="nameCheck">
+      <h1>Hi love, type your name to continue 🌸</h1>
+      <input type="text" id="nameInput" placeholder="Enter your name"/>
+      <button onclick="checkName()">Continue</button>
+    </div>
+
+    <div id="questionSection" class="hidden">
+      <h1>Do you want to read a surprise poem written just for you?</h1>
+      <button onclick="showPoem()">Yes</button>
+      <button onclick="showMessage()">No</button>
+    </div>
+
+    <div id="poem" class="poem hidden">
+      <h2>In That First Hello</h2>
+      <div id="poemContent"></div>
+    </div>
+
+    <div id="noMessage" class="final-message hidden">
+      <h2>That's okay 💐</h2>
+      <p>Take your time. You can come back when you're ready. This poem will always be here waiting for you.</p>
+    </div>
+  </div>
+
+  <script>
+    const correctName = "YourWifeName".toLowerCase(); // Replace with her name
+    const poemText = `I still remember—
+that narrow bus aisle,
+your legs too short to kiss the floor,
+swinging like laughter in the air,
+feet dancing to a rhythm only love could hear.
+
+I still remember—
+my suitcase wheels groaning behind me,
+and then—
+"Oe!"
+Your voice cracked the silence,
+not just calling me—
+but claiming me,
+as if the world finally introduced me to home.
+
+We shared ten hours,
+not just of road and sky—
+but of stolen glances,
+shared snacks,
+sunlight brushing your cheek
+while I fell in love
+in between mountains and quiet smiles.
+
+Nature rode with us,
+as if even the rivers paused to watch,
+as if the trees leaned in to listen
+to how we spoke
+without words—
+how we wrote a chapter
+in each other's hearts
+without ink.
+
+And even now,
+after miles and seasons,
+I still see you—
+legs swinging freely,
+saying "Oe!"
+and stealing my heart
+all over again.`;
+
+    function checkName() {
+      const input = document.getElementById('nameInput').value.trim().toLowerCase();
+      if (input === correctName) {
+        document.getElementById('nameCheck').classList.add('hidden');
+        document.getElementById('questionSection').classList.remove('hidden');
+      } else {
+        alert("Oops! That doesn't match the name I was expecting 🌸");
+      }
+    }
+
+    function showPoem() {
+      document.getElementById('questionSection').classList.add('hidden');
+      document.getElementById('poem').classList.remove('hidden');
+      typeWriter(poemText, 0);
+    }
+
+    function showMessage() {
+      document.getElementById('questionSection').classList.add('hidden');
+      document.getElementById('noMessage').classList.remove('hidden');
+    }
+
+    function typeWriter(text, i) {
+      if (i < text.length) {
+        document.getElementById("poemContent").innerHTML += text.charAt(i);
+        setTimeout(() => typeWriter(text, i + 1), 30); // typing speed
+      }
+    }
+  </script>
+</body>
+</html>
